@@ -32,4 +32,5 @@ typedef struct {
 } ImageBW;
 
 
+
 #endif /* stuctures_h */
