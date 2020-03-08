@@ -25,12 +25,6 @@ typedef struct {
     PixelRGB * ptrPixel;               /* Pixels of the image */
 } ImageRGB;
 
-typedef struct {
-    int width;          /* Nb of columns */
-    int height;         /* Nb of rows */
-    PixelBW* ptrPixel;               /* Pixels of the image */
-} ImageBW;
-
 
 
 #endif /* stuctures_h */
