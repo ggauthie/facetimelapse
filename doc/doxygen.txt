@@ -1,0 +1,70 @@
+
+/**
+ * \file structures.h
+ * \brief Programme de structure des fonctions
+ * \author Guillaume - Gwenael - William - Esteban
+ * \date mars 2020
+ *
+ */
+
+
+/**
+ * \fn ImageRGB * createImage(int width, int height)
+ * \brief création d'image noir et blanc/RGB
+ *
+ * \return l'image créée
+ */
+ImageRGB * createImage(int width, int height);
+
+/**
+ * \fn void freeImage(ImageRGB * image)
+ * \brief libération mémoire image noir et blanc
+ *
+ * \return free(image)
+ */
+void freeImage(ImageRGB * image);
+
+/**
+ * \fn ImageRGB * color_to_WB(ImageRGB * image)
+ * \brief conversion image couleur vers noir et blanc
+ *
+ * \return image converti vers WB
+ */
+ImageRGB * color_to_WB(ImageRGB * image);
+
+/**
+ * \fn PixelRGB getPixel(ImageRGB * image, int width, int height)
+ * \brief recupération d'un pixel noir et blanc avec ses coordonnées
+ *
+ * \return les coordonées d'un pixel
+ */
+PixelRGB getPixel(ImageRGB * image, int width, int height);
+
+/**
+ * \fn void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel)
+ * \brief modification d'un pixel noir et blanc / si image couleur PixelRGB
+ *
+ * \return le pixel modifié
+ */
+void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel);
+
+/**
+ * \fn Image[] imagesInter(ImageBW * image1, ImageRGB * image2, int nombre_image)
+ * \brief Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu
+ *
+ * \return Images à placer entre une image de départ et de fin
+ */
+Image[] imagesInter(ImageBW * image1, ImageRGB * image2, int nombre_image);
+
+/**
+ * \fn int calculateWeight (int nbImage, int numeroImage)
+ * \brief calcul du poids de l'image
+ *
+ * \return le poids de l'image
+ */
+int calculateWeight (int nbImage, int numeroImage); /*calcul du poids de l'image*/
+
+
+
+//Fonction conversion
+/*Fonction read/write -> attente de validation des structures avant modification des fonctions vu en cours*/
