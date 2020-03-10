@@ -13,6 +13,7 @@ Image[] imagesInter(ImageBW * image1, ImageRGB * image2, int nombre_image); /*Re
 int calculateWeight (int nbImage, int numeroImage); /*calcul du poids de l'image*/
 
 //Fonction conversion
-/*Fonction read/write -> attente de validation des structures avant modification des fonctions vu en cours*/
+Image* readBMPFile(char* filename, int verbose);
+void writeBMPFile(char* filename, Image* im, int verbose);
 
 #endif
