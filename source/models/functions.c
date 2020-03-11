@@ -1,6 +1,3 @@
-#ifndef  FUNCTIONS_C
-#define  FUNCTIONS_C
-
 #include "stuctures.h"
 #include "functions.h"
 
