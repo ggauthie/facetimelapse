@@ -46,7 +46,7 @@ void  freeImage(Image * image)
     free(image);
 }
 
-Image[] imagesInter(Image * image1, Image * image2, int nombre_image){
+Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     int i=0;
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
     for(i;i<nombre_image;i++){
