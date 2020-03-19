@@ -6,11 +6,11 @@ Image * createImage(int width, int height){
     Image *new_image = (Image*) malloc(sizeof(ImageRGB));
     new_image->width = h;
     new_image->height = l;
-    new_image->raw_data = (PixelRGB*)malloc(l*h*sizeof(PixelRGB));
+    new_image->raw_data = (Pixel*)malloc(l*h*sizeof(PixelRGB));
     return new_image;
 }
 
-unsigned char modifyPixel(int witdh, int height, PixelRGB pixel){
+unsigned char modifyPixel(int witdh, int height, Pixel pixel){
 	double GRIS;
 	GRIS = 0.2125*(image->rawdata[width*image->width + height]->red)+0.7154*(image->rawdata[width*image->width + height]->green)+0.0721*(image->rawdata[width*image->width + height]->blue);
 	pixel->blue = GRIS;
@@ -26,7 +26,7 @@ Image * color_to_WB(Image * image){
 	int i=0;
 	int j=0;
 	double GRIS;
-	PixelRGB pixel =(pixel)malloc(sizeof(pixel));
+	PixelRGB pixel =(Pixel)malloc(sizeof(pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
 	 GRIS = 0.2125*(image->rawdata[i*image->width + j]->red)+0.7154*(image->rawdata[i*image->width + j]->green)+0.0721*(image->rawdata[i*image->width + j]->blue);   
