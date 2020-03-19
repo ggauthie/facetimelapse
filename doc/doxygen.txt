@@ -8,7 +8,7 @@
 
 
 /**
- * \fn ImageRGB * createImage(int width, int height)
+ * \fn Image * createImage(int width, int height)
  * \brief création d'image noir et blanc/RGB
  *
  * \return l'image créée
@@ -16,7 +16,7 @@
 ImageRGB * createImage(int width, int height);
 
 /**
- * \fn void freeImage(ImageRGB * image)
+ * \fn void freeImage(Image * image)
  * \brief libération mémoire image noir et blanc
  *
  * \return free(image)
@@ -24,10 +24,10 @@ ImageRGB * createImage(int width, int height);
 void freeImage(ImageRGB * image);
 
 /**
- * \fn ImageRGB * color_to_WB(ImageRGB * image)
+ * \fn Image * color_to_WB(Image * image)
  * \brief conversion image couleur vers noir et blanc
  *
- * \return image converti vers WB
+ * \return image converti vers WB (création d'une nouvelle image)
  */
 ImageRGB * color_to_WB(ImageRGB * image);
 
@@ -48,20 +48,20 @@ PixelRGB getPixel(ImageRGB * image, int width, int height);
 void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel);
 
 /**
- * \fn Image[] imagesInter(ImageBW * image1, ImageRGB * image2, int nombre_image)
+ * \fn Image[] imagesInter(Image * image1, Image * image2, int nombre_image)
  * \brief Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu
  *
- * \return Images à placer entre une image de départ et de fin
+ * \return Un tableau d'images qui seront entre une image de début et de fin
  */
-Image[] imagesInter(ImageBW * image1, ImageRGB * image2, int nombre_image);
+Image[] imagesInter(Image * image1, Image * image2, int nombre_image);
 
 /**
  * \fn int calculateWeight (int nbImage, int numeroImage)
  * \brief calcul du poids de l'image
  *
- * \return le poids de l'image
+ * \return le poids de l'image entre une image de début et une image de fin (on calculera juste le poids par rapport à l'image de départ, donc aura l'autre poids par rapport à l'image de fin en faisant 1-(le poids par rapport à la première image) 
  */
-int calculateWeight (int nbImage, int numeroImage); /*calcul du poids de l'image*/
+int calculateWeight (int nbImage, int numeroImage);
 
 
 //Fonction conversion
