@@ -3,10 +3,10 @@
 
 
 Image * createImage(int width, int height){
-    Image *new_image = (Image*) malloc(sizeof(ImageRGB));
+    Image *new_image = (Image*) malloc(sizeof(Image));
     new_image->width = h;
     new_image->height = l;
-    new_image->raw_data = (Pixel*)malloc(l*h*sizeof(PixelRGB));
+    new_image->ptrPixel = (Pixel*)malloc(l*h*sizeof(Pixel));
     return new_image;
 }
 
@@ -26,7 +26,7 @@ Image * color_to_WB(Image * image){
 	int i=0;
 	int j=0;
 	double GRIS;
-	PixelRGB pixel =(Pixel)malloc(sizeof(pixel));
+	Pixel pixel =(Pixel)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
 	 GRIS = 0.2125*(image->rawdata[i*image->width + j]->red)+0.7154*(image->rawdata[i*image->width + j]->green)+0.0721*(image->rawdata[i*image->width + j]->blue);   
@@ -42,7 +42,7 @@ Image * color_to_WB(Image * image){
 
 void  freeImage(Image * image)
 {
-    free(image->raw_data);
+    free(image->ptrPixel);
     free(image);
 }
 
@@ -50,8 +50,8 @@ Image[] imagesInter(Image * image1, Image * image2, int nombre_image){
     int i=0;
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
     for(i;i<nombre_image;i++){
-        image->raw_data = 
-        tab_images[i]->raw_data[]
+        image->ptrPixel = 
+        tab_images[i]->ptrPixel[]
     }
     
 } /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
