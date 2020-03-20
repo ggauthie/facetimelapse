@@ -9,13 +9,13 @@ endif
 
 
 main: main.o test.o functions.o
-    $(CC) -o $@ $? $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 main.o: main.c functions.h structures.h test.h
 	$(CC) -o $@ -c $< $(CFLAGS)
 	
 test.o : test.c test .h functions.h structures.h
-    $(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS)
     
 functions.o: functions.c functions.h structures.h
 	$(CC) -o $@ -c $< $(CFLAGS)
