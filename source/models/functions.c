@@ -10,14 +10,17 @@ Image * createImage(int width, int height){
     return new_image;
 }
 
-unsigned char modifyPixel_to_WB(Pixel* pixel){
+Pixel * modifyPixel_to_WB(Pixel* pixel){
 	unsigned char GRIS;
 	GRIS = 0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue);
-	return GRIS;
+	pixel->blue = GRIS;
+	pixel->green= GRIS;
+ 	pixel->red  = GRIS; 
+ 	return pixel;
 }
 
 	
-void setPixel(Image* image, int x, int y, Pixel* p){
+void setPixel(Image* image, int x, int y, Pixel* pixel){
 	image->rawdata[x*image->y + height] = pixel;
     
 }
@@ -27,13 +30,10 @@ Image * color_to_WB(Image * image){
 	int j=0;
 	unsigned char GRIS;
 	Image imageWB = createimage(image->width, image->height);
-	Pixel pixel =(Pixel)malloc(sizeof(Pixel));
+	Pixel* pixel =(Pixel)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
-	 GRIS = modifypixel_to_WB(image->rawdata[i*(image->width)+j]);   
-	 pixel->blue = GRIS;
-	 pixel->green= GRIS;
- 	 pixel->red  = GRIS; 
+	 pixel = modifypixel_to_WB(image->rawdata[i*(image->width)+j]);   
 	 setPixel(image,i,j,pixel);
 	 }
 	}
