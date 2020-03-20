@@ -13,7 +13,7 @@
  *
  * \return l'image créée
  */
-ImageRGB * createImage(int width, int height);
+Image * createImage(int width, int height);
 
 /**
  * \fn void freeImage(Image * image)
@@ -21,7 +21,7 @@ ImageRGB * createImage(int width, int height);
  *
  * \return free(image)
  */
-void freeImage(ImageRGB * image);
+void freeImage(Image * image);
 
 /**
  * \fn Image * color_to_WB(Image * image)
@@ -29,7 +29,7 @@ void freeImage(ImageRGB * image);
  *
  * \return image converti vers WB (création d'une nouvelle image)
  */
-ImageRGB * color_to_WB(ImageRGB * image);
+Image * color_to_WB(Image * image);
 
 /**
  * \fn PixelRGB getPixel(ImageRGB * image, int width, int height)
@@ -37,15 +37,15 @@ ImageRGB * color_to_WB(ImageRGB * image);
  *
  * \return les coordonées d'un pixel
  */
-PixelRGB getPixel(ImageRGB * image, int width, int height);
+Pixel getPixel(Image * image, int width, int height);
 
 /**
  * \fn void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel)
- * \brief modification d'un pixel noir et blanc / si image couleur PixelRGB
+ * \brief modification d'un pixel couleur vers noir et blanc 
  *
  * \return le pixel modifié
  */
-void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel);
+unsigned char modifyPixel_to_WB(Pixel pixel);
 
 /**
  * \fn Image[] imagesInter(Image * image1, Image * image2, int nombre_image)
@@ -53,7 +53,7 @@ void modifyPixel(ImageRGB * image, int witdh, int height, PixelRGB pixel);
  *
  * \return Un tableau d'images qui seront entre une image de début et de fin
  */
-Image[] imagesInter(Image * image1, Image * image2, int nombre_image);
+Image* imagesInter(Image * image1, Image * image2, int nombre_image);
 
 /**
  * \fn int calculateWeight (int nbImage, int numeroImage)
@@ -61,7 +61,7 @@ Image[] imagesInter(Image * image1, Image * image2, int nombre_image);
  *
  * \return le poids de l'image entre une image de début et une image de fin (on calculera juste le poids par rapport à l'image de départ, donc aura l'autre poids par rapport à l'image de fin en faisant 1-(le poids par rapport à la première image) 
  */
-int calculateWeight (int nbImage, int numeroImage);
+float calculateWeight (int nbImage, int numeroImage);
 
 
 //Fonction conversion
