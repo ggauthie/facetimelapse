@@ -49,11 +49,21 @@ void  freeImage(Image * image)
 
 Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     int i=0;
+	float a,b,c,d,e,f;
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
     for(i;i<nombre_image;i++){
-        image->ptrPixel = 
-        tab_images[i]->ptrPixel[]
+        a=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->blue;
+		b=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->green;
+		c=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->red;
+		d=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->blue;
+		e=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->green;
+		f=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->red;
+		tab_images[i]->ptrPixel->blue=(a+d)/2;
+		tab_images[i]->ptrPixel->green=(b+e)/2;
+		tab_images[i]->ptrPixel->red=(c+f)/2;
     }
+	return tab_images;
+}
     
 } /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
 float calculateWeight (int nbImage, int numeroImage){
