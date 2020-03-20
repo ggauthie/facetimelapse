@@ -65,7 +65,7 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
 	return tab_images;
 }
     
-} /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
+/*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
 float calculateWeight (int nbImage, int numeroImage){
     return (numeroImage/nbImage+1); //nbImage commence à 1
 }
