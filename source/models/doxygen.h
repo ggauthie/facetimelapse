@@ -1,0 +1,73 @@
+/**
+ * \file structures.h
+ * \brief Programme de structure des fonctions
+ * \author Guillaume - Gwenael - William - Esteban
+ * \date mars 2020
+ *
+ */
+
+
+/**
+ * \fn Image * createImage(int width, int height)
+ * \brief création d'image noir et blanc/RGB
+ *
+ * \return l'image créée
+ */
+Image * createImage(int width, int height);
+
+/**
+ * \fn void freeImage(Image * image)
+ * \brief libération mémoire image noir et blanc
+ *
+ * \return free(image)
+ */
+void freeImage(Image * image);
+
+/**
+ * \fn Image * color_to_WB(Image * image)
+ * \brief conversion image couleur vers noir et blanc
+ *
+ * \return image converti vers WB (création d'une nouvelle image)
+ */
+Image * color_to_WB(Image * image);
+
+/**
+ * \fn PixelRGB getPixel(ImageRGB * image, int width, int height)
+ * \brief recupération d'un pixel noir et blanc avec ses coordonnées
+ *
+ * \return les coordonées d'un pixel
+ */
+Pixel getPixel(Image * image, int width, int height);
+
+/**
+ * \fn unsigned char modifyPixel_to_WB(Pixel pixel)
+ * \brief modification d'un pixel couleur vers noir et blanc 
+ *
+ * \return le pixel modifié
+ */
+unsigned char modifyPixel_to_WB(Pixel pixel);
+
+/**
+ * \fn Image* imagesInter(Image * image1, Image * image2, int nombre_image)
+ * \brief Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu
+ *
+ * \return Un tableau d'images qui seront entre une image de début et de fin
+ */
+Image* imagesInter(Image * image1, Image * image2, int nombre_image);
+
+/**
+ * \fn float calculateWeight (int nbImage, int numeroImage)
+ * \brief calcul du poids de l'image
+ *
+ * \return le poids de l'image entre une image de début et une image de fin (on calculera juste le poids par rapport à l'image de départ, donc aura l'autre poids par rapport à l'image de fin en faisant 1-(le poids par rapport à la première image) 
+ */
+float calculateWeight (int nbImage, int numeroImage);
+
+
+//Fonction conversion
+
+Image* readBMPFile(char* filename, int verbose);
+void writeBMPFile(char* filename, Image* im, int verbose);
+
+/*fonction de lecture/ecriture d'un fichier bmp 
+ */
