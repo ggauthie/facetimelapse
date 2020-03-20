@@ -10,30 +10,31 @@ Image * createImage(int width, int height){
     return new_image;
 }
 
-unsigned char modifyPixel(int witdh, int height, Pixel pixel){
-	double GRIS;
-	GRIS = 0.2125*(image->ptrPixel[width*image->width + height]->red)+0.7154*(image->ptrPixel[width*image->width + height]->green)+0.0721*(image->ptrPixel[width*image->width + height]->blue);
-	pixel->blue = GRIS;//image correspond à quoi vu qu'elle n'est pas dans les paramètres ?
-	pixel->green= GRIS;
-	pixel->red  = GRIS;
-	image->ptrPixel[width*image->width + height]= pixel;
+unsigned char modifyPixel_to_WB(Pixel* pixel){
+	unsigned char GRIS;
+	GRIS = 0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue);
+	return GRIS;
 }
-// JE CAPTE PAS TROP A QUOI ELLE SERT VRAIMENT CETTE FONCTION ?? RETOURNE UN UNSIGNED CHAR ?
+
 	
-	
+void setPixel(Image* image, int x, int y, Pixel* p){
+	image->rawdata[x*image->y + height] = pixel;
+    
+}
 
 Image * color_to_WB(Image * image){
 	int i=0;
 	int j=0;
-	double GRIS;
+	unsigned char GRIS;
+	Image imageWB = createimage(image->width, image->height);
 	Pixel pixel =(Pixel)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
-	 GRIS = 0.2125*(image->ptrPixel[i*image->width + j]->red)+0.7154*(image->ptrPixel[i*image->width + j]->green)+0.0721*(image->ptrPixel[i*image->width + j]->blue);   
+	 GRIS = modifypixel_to_WB(image->rawdata[i*(image->width)+j]);   
 	 pixel->blue = GRIS;
 	 pixel->green= GRIS;
  	 pixel->red  = GRIS; 
-	 modifyPixel(image,i,j,pixel);
+	 setPixel(image,i,j,pixel);
 	 }
 	}
 	return imageWB;
@@ -56,7 +57,7 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     
 } /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
 float calculateWeight (int nbImage, int numeroImage){
-    return (numeroImage/nbImage); //nbImage commence à 1
+    return (numeroImage/nbImage+1); //nbImage commence à 1
 }
 
 
