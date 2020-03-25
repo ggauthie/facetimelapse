@@ -21,7 +21,7 @@ Pixel * modifyPixel_to_WB(Pixel* pixel){
 
 	
 void setPixel(Image* image, int x, int y, Pixel* pixel){
-	image->rawdata[x*image->y + height] = pixel;
+	image->ptrPixel[x*image->width +y] = pixel;
     
 }
 
@@ -33,7 +33,7 @@ Image * color_to_WB(Image * image){
 	Pixel* pixel =(Pixel)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
-	 pixel = modifypixel_to_WB(image->rawdata[i*(image->width)+j]);   
+	 pixel = modifypixel_to_WB(image->ptrPixel[i*(image->width)+j]);   
 	 setPixel(image,i,j,pixel);
 	 }
 	}
@@ -51,19 +51,27 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     int i=1;
     int j;
 	float a,b,c,d,e,f;
+	
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
-    for(i;i<=nombre_image;i++){
-        for(j;j< )
-        a=calculateWeight(nombre_image,i)*image1->rawdata[->blue;
-		b=calculateWeight(nombre_image,i)*image1->ptrPixel->green;
-		c=calculateWeight(nombre_image,i)*image1->ptrPixel->red;
-		d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->blue;
-		e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->green;
-		f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->red;
-		tab_images[i]->ptrPixel->blue=(a+d)/2;
-		tab_images[i]->ptrPixel->green=(b+e)/2;
-		tab_images[i]->ptrPixel->red=(c+f)/2;
+    for(i;i<=nombre_image;i++){ 
+        for(j; j<image1->width; j++){
+        for(k; k<image1->height;k++){
+            
+            Pixel *pixel =(Pixel*)malloc(sizeof(Pixel));
+            
+            a=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k]->blue;
+		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k]->green;
+		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k]->red;
+		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k]->blue;
+		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k]->green;
+		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k]->red;
+		    pixel->blue=(a+d)/2;
+		    pixel->green=(b+e)/2;
+		    pixel->red=(c+f)/2;
+		    setPixel(tab_images[i], j, k, pixel)
     }
+}
+}
 	return tab_images;
 }
     
