@@ -28,7 +28,6 @@ void setPixel(Image* image, int x, int y, Pixel* pixel){
 Image * color_to_WB(Image * image){
 	int i=0;
 	int j=0;
-	unsigned char GRIS;
 	Image imageWB = createimage(image->width, image->height);
 	Pixel* pixel =(Pixel)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
@@ -49,7 +48,8 @@ void  freeImage(Image * image)
 
 Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     int i=1;
-    int j;
+    int j=0;
+    int k=0;
 	float a,b,c,d,e,f;
 	
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
