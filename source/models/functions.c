@@ -28,8 +28,8 @@ void setPixel(Image* image, int x, int y, Pixel* pixel){
 Image * color_to_WB(Image * image){
 	int i=0;
 	int j=0;
-	Image imageWB = createimage(image->width, image->height);
-	Pixel* pixel =(Pixel)malloc(sizeof(Pixel));
+	Image *imageWB = createImage(image->width, image->height);
+	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
     for(i; i<= image->width; i++){
 	for(j; j<= image->height; j++){
 	 pixel = modifypixel_to_WB(image->ptrPixel[i*(image->width)+j]);   
