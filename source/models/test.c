@@ -1,17 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "fichier.h"
-#include "image.h"
-#include "BMPFile.h"
-
-#define MY_FILENAME_MAX 16
+#include "structures.h"
+#include "functions.h"
 
 int test_create_image(Image* image){
     if(image == NULL){
         return -1;
     }else{
         return 0;
+    }
+}
+
+int test_same_image(Image* image1, Image* image2){
+    if(image1!=NULL && image2!=NULL){
+        if((image1->width==image2->width) && (image1->height==image2->height)){
+            return 0;
+        }else{
+            return -1;
+        }
     }
 }
 
