@@ -48,16 +48,18 @@ void  freeImage(Image * image)
 }
 
 Image* imagesInter(Image * image1, Image * image2, int nombre_image){
-    int i=0;
+    int i=1;
+    int j;
 	float a,b,c,d,e,f;
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
-    for(i;i<nombre_image;i++){
-        a=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->blue;
-		b=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->green;
-		c=calculateWeight(nbImage,i)*tab_images[i]->ptrPixel->red;
-		d=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->blue;
-		e=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->green;
-		f=(1-calculateWeight(nbImage,i))*tab_images[i]->ptrPixel->red;
+    for(i;i<=nombre_image;i++){
+        for(j;j< )
+        a=calculateWeight(nombre_image,i)*image1->rawdata[->blue;
+		b=calculateWeight(nombre_image,i)*image1->ptrPixel->green;
+		c=calculateWeight(nombre_image,i)*image1->ptrPixel->red;
+		d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->blue;
+		e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->green;
+		f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel->red;
 		tab_images[i]->ptrPixel->blue=(a+d)/2;
 		tab_images[i]->ptrPixel->green=(b+e)/2;
 		tab_images[i]->ptrPixel->red=(c+f)/2;
