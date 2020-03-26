@@ -3,26 +3,41 @@
 
 #include "stuctures.h"
 
+/*création d'image noir et blanc avec une largeur et une hauteur*/
+/*return: pointeur sur l'image créee*/
+Image * createImage(int width, int height); 
 
-Image * createImage(int width, int height); /*création d'image noir et blanc/RGB*/
+/*libération mémoire image noir et blanc*/
+void freeImage(Image * image); 
 
-void freeImage(Image * image); /*libération mémoire image noir et blanc*/
+/*conversion image couleur vers noir et blanc avec un pointeur vers une image donnée en paramètre*/
+/*return: pointeur vers une nouvelle image*/
+Image * color_to_WB(Image * image);
 
-Image * color_to_WB(Image * image);/*conversion image couleur vers noir et blanc*/
+/*recupération d'un pixel noir et blanc avec ses coordonnées (x,y)*/
+/*return: la valeur du pixel*/
+Pixel getPixel(Image * image, int width, int height);
 
-Pixel getPixel(Image * image, int width, int height);/*recupération d'un pixel noir et blanc avec ses coordonnées*/
+/*remplace le pixel aux coordonnées (x,y) de l'image par une valeur de pixel donnée en paramètre*/
+void setPixel(Image* image, int x, int y, Pixel* pixel); 
 
-void setPixel(Image* image, int x, int y, Pixel* pixel); /*remplace le pixel pixel aux coordonnées (x,y)de l'image image*/
+/*modification d'un pixel couleur vers noir et blanc*/
+/*return: la valeur en noir et blanc du pixel*/
+unsigned char modifyPixel_to_WB(Pixel* pixel); 
 
-unsigned char modifyPixel_to_WB(Pixel* pixel); /*modification d'un pixel noir et blanc*/
+/*Création d'images intermédiaire à partir de deux images de référence (pointeurs donnés en paramètre) et du nombre voulu d'image*/
+/*return: Renvoi un pointeur vers un tableau d'image*/
+Image* imagesInter(Image * image1, Image * image2, int nombre_image); 
 
-Image* imagesInter(Image * image1, Image * image2, int nombre_image); /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
+/*calcul du poids de l'image avec un nombre d'image et un numéro d'image donnés en paramètre*/
+/*return:  le poids de l'image entre une image de début et une image de fin (on calculera le poids par rapport à l'image de départ, donc aura l'autre poids par rapport à l'image de fin en faisant 1-(le poids par rapport à la première image)*/ 
+float calculateWeight (int nbImage, int numeroImage);
 
-float calculateWeight (int nbImage, int numeroImage); /*calcul du poids de l'image*/
-
-//Fonction conversion
-
+/*Fonction de lecture d'un fichier bmp*/
+/*return: pointeur vers image*/
 Image* readBMPFile(char* filename, int verbose);
+
+/*Fonction d'écriture d'un fichier bmp*/
 void writeBMPFile(char* filename, Image* im, int verbose);
 
 #endif
