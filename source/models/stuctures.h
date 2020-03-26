@@ -1,12 +1,12 @@
 //
-//  stuctures.h
+//  structures.h
 //  
 //
 //  Created by Gwenael Jestin on 29/02/2020.
 //
 
-#ifndef stuctures_h
-#define stuctures_h
+#ifndef structures_h
+#define structures_h
 
 typedef struct {
     unsigned char blue;
@@ -24,4 +24,4 @@ typedef struct {
 
 
 
-#endif /* stuctures_h */
+#endif /* structures_h */
