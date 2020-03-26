@@ -23,9 +23,9 @@ int test_same_image(Image* image1, Image* image2){
 }
 
 
-void print_values_RGB(Pixel* pixel){
-    printf( "VALEURS R: %u /G: %u /B %u \n", pixel->red, pixel->green, pixel->blue);
-} 
+void print_values_RGB(Pixel pixel){
+    printf( "VALEURS R: %u /G: %u /B %u \n", pixel.red, pixel.green, pixel.blue);
+}
 
 void print_values_Image(Image * image){
     int i=0;
