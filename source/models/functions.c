@@ -10,19 +10,21 @@ Image * createImage(int width, int height){
     new_image->ptrPixel = (Pixel*)malloc(width*height*sizeof(Pixel));
     return new_image;
 }
-/*GENERER UNE IMAGE ALEATOIRE
 
-Image * generate_random_image(int width, int height){
-    Image *new_image = (Image*) malloc(sizeof(Image));
-    new_image=createImage(int width, int height);
-    int taille_image = width*height;
-    for(int i=0;i<taille_image;i++){
-        new_image->ptrPixel->blue=rand()
-    }
-*/
+Pixel * create_pixel(int red, int green, int blue){
+
+	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
+	pixel->red =red;
+	pixel->blue =blue;
+	pixel->green=green;
+
+	return pixel;
+
+}
+
 }
 Pixel* modifyPixel_to_WB(Pixel* pixel){
-	unsigned char GRIS;
+	int GRIS;
 	GRIS = floor(0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue));
 	pixel->blue = GRIS;
 	pixel->green= GRIS;
