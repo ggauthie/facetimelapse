@@ -9,6 +9,11 @@
 /*return: pointeur sur l'image créee*/
 Image * createImage(int width, int height); 
 
+/*création d'un pixel en rentrant les valeurs RGB*/
+/*return : pointeur sur le pixel créé*/
+
+Pixel * create_pixel(int red, int green, int blue)
+
 /*libération mémoire image noir et blanc*/
 void freeImage(Image * image); 
 
