@@ -25,7 +25,7 @@ Pixel * create_pixel(int red, int green, int blue){
 }
 Pixel* modifyPixel_to_WB(Pixel* pixel){
 	int GRIS;
-	GRIS = floor(0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue));
+	GRIS = (unsigned char)floor(0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue));
 	pixel->blue = GRIS;
 	pixel->green= GRIS;
  	pixel->red  = GRIS;
@@ -33,10 +33,14 @@ Pixel* modifyPixel_to_WB(Pixel* pixel){
 }
 
 void setPixel(Image* image, int x, int y, Pixel* pixel){
+    if((x>=image->width) || (y>=image->height || (image == NULL)){
+        printf("Error : en dehors de l'image ou image null");
+        return -1;
+    }else{
 	image->ptrPixel[x*image->width +y].blue=pixel->blue;
 	image->ptrPixel[x*image->width +y].red=pixel->red;
 	image->ptrPixel[x*image->width +y].green=pixel->green;
-
+}
 }
 
 Image * color_to_WB(Image * image){
@@ -79,9 +83,9 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
 		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].blue;
 		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].green;
 		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].red;
-		    pixel->blue=(a+d)/2;
-		    pixel->green=(b+e)/2;
-		    pixel->red=(c+f)/2;
+		    pixel->blue=(unsigned char)floor((a+d)/2);
+		    pixel->green=(unsigned char)floor((b+e)/2);
+		    pixel->red=(unsigned char)floor((c+f)/2);
 		    setPixel(tab_images, j, k, pixel);
 		    tab_images++;
     }
