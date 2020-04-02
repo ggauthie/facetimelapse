@@ -22,8 +22,8 @@ static void test_create_pixel(void **state){
     
 }
 
-*/test imageInter*/
-*/test colortoWB */
+/*test imageInter*/
+/*test colortoWB */
 
 static void test_modifyPixel_to_WB(void **state){
 	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
