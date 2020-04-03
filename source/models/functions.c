@@ -11,17 +11,6 @@ Image * createImage(int width, int height){
     return new_image;
 }
 
-Pixel * create_pixel(int red, int green, int blue){
-
-	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
-	pixel->red =red;
-	pixel->blue =blue;
-	pixel->green=green;
-
-	return pixel;
-
-}
-
 }
 Pixel* modifyPixel_to_WB(Pixel* pixel){
 	int GRIS;
@@ -30,6 +19,10 @@ Pixel* modifyPixel_to_WB(Pixel* pixel){
 	pixel->green= GRIS;
  	pixel->red  = GRIS;
  	return pixel;
+}
+
+Pixel* getPixel(Image * image, int width, int height){
+    return &(image->ptrPixel[width*image->width + height]);
 }
 
 void setPixel(Image* image, int x, int y, Pixel* pixel){
