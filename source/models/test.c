@@ -5,77 +5,121 @@
 #include "structures.h"
 #include "functions.h"
 
+
+static int setup(void **state){
+    int i=0;
+    Image *image_1 = createImage(3,4);
+    Image *image_2 = createImage(3,4);
+    if(image_1 ==NULL || image_2==NULL || image_1->ptrPixel ==NULL || image_2->ptrPixel==NULL){
+        return -1;
+    }
+    for(i;i<(image_1->width)*(image_1->height);i++){
+        image_1->ptrPixel[i];
+    }
+    i=0;
+    for(i;i<(image_2->width)*(image_2->height);i++){
+        image_2->ptrPixel[i];
+    }
+    return 0;
+}
+
+static int teardown(void **state){
+    freeImage(image_1);
+    freeImage(image_2);
+    return 0;
+}
+
 static void test_createImage(void **state){
-	Image *image = (Image*) malloc(sizeof(Image));
-	image=createImage(10,20);
-   	assert_int_equal (image->width,10);
-	assert_int_equal (image->height,20);
+   	assert_int_equal (image_1->width,3);
+	assert_int_equal (image_1->height,4);
     
 }
 
-static void test_create_pixel(void **state){
-	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
-	pixel = create_pixel(128,255,75);
-   	assert_int_equal (pixel->red,128);
-	assert_int_equal (pixel->green,256);
-	assert_int_equal (pixel->blue,75);
-    
-}
 
 /*test imageInter*/
+
+static void test_imageInter(void **state){
+    int i=0,j=0;
+    Image* tab_images = imagesInter(image_1, image_2, 3);
+    
+         for(i; i<(image_1->width)*(image_1->height);i++){
+             
+             assert_memory_equal(tab_images[0]->ptrPixel[i]->blue,63);
+             assert_memory_equal(tab_images[0]->ptrPixel[i]->red,63);
+             assert_memory_equal(tab_images[0]->ptrPixel[i]->green,63);
+             
+             assert_memory_equal(tab_images[1]->ptrPixel[i]->blue,127);
+             assert_memory_equal(tab_images[1]->ptrPixel[i]->red,127);
+             assert_memory_equal(tab_images[1]->ptrPixel[i]->green,127);
+             
+             assert_memory_equal(tab_images[2]->ptrPixel[i]->blue,191);
+             assert_memory_equal(tab_images[2]->ptrPixel[i]->red,191);
+             assert_memory_equal(tab_images[2]->ptrPixel[i]->green,191);
+             
+        }
+        
+}
+
 /*test colortoWB */
 
+static void test_colortoWB(void **state){
+    
+}
+
 static void test_modifyPixel_to_WB(void **state){
-	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
-	pixel = modifyPixel(create_pixel(128,256,75));
+	Pixel* pixel_1 ={128,256,75};
+	Pixel* pixel_2 =modifyPixel_to_WB(pixel_1);
 	
-	assert_int_equal (pixel->blue,215);
-	assert_int_equal (pixel->green,215);
-	assert_int_equal (pixel->red,215);
+	assert_int_equal (pixel_2->blue,215);
+	assert_int_equal (pixel_2->green,215);
+	assert_int_equal (pixel_2->red,215);
 	
 }
 
 static void test_setPixel(void **state){
-
-	Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
-	image* image =(Image*)malloc(sizeof(Pixel));
-
-	pixel=create_pixel(128,255,75);
-	image=create_image(10,20);
-
-	setPixel(image,5, 10, pixel);
+    
+    Pixel* pixel_1 ={128,256,75};
+    
+	setPixel(image_1,2, 2, pixel_1);
 	
-	assert_int_equal (image->ptrPixel[5*10+10]->blue,pixel->blue);
-	assert_int_equal (image->ptrPixel[5*10+10]->green,pixel->green);
-	assert_int_equal (image->ptrPixel[5*10+10]-red,pixel->red);
+	assert_int_equal (image_1->ptrPixel[2*image_1->width+2]->blue,pixel_1->blue);
+	assert_int_equal (image_1->ptrPixel[2*image_1->width+2]->green,pixel_1->green);
+	assert_int_equal (image_1->ptrPixel[2*image_1->width+2]->red,pixel_1->red);
 	
-	assert_int_equal (setPixel(image,50, 12, pixel),-1);
+	assert_int_equal (setPixel(image,2, 12, pixel),-1);
 	
 	
 }
 
+static void test_getPixel(void **state){
+    Pixel *pixel = getPixel(image_1, 2, 1);
+    assert_ptr_equal(pixel, image_1->ptrPixel[2*image_1->width + 1])
+}
+
+
 static void test_freeImage(void **state){
-	Image *image = (Image*) malloc(sizeof(Image));
-	image=createImage(10,20);
-	
-	freeImage(image);
-	assert_null (image); //vérifie si le pointeur image est NULL
+    
+	freeImage(image_1);
+	assert_null (image_1); //vérifie si le pointeur image est NULL
 }
 
 
 static void test_calculateWeight(void **state){
-	void assert_float_equal	(calculateWeight (10, 1),0.09, 0.001);
+	assert_float_equal	(calculateWeight (10, 1),0.09, 0.001);
 	
 	
 }
 
 int main(void) {
     const struct CMUnitTest tests[] = {
-        cmocka_unit_test(test_createImage),
-    	cmocka_unit_test(test_create_pixel),
-    	cmocka_unit_test(test_modifyPixel_to_WB),
-	    cmocka_unit_test(test_setPixel),
-	    cmocka_unit_test(test_freeImage)
+        cmocka_unit_test_setup_teardown(test_createImage, setup, teardown), 
+    	cmocka_unit_test_setup_teardown(test_modifyPixel_to_WB, setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_setPixel,setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_getPixel,setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_freeImage,setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_colortoWB,setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_imagesInter,setup, teardown),
+	    cmocka_unit_test_setup_teardown(test_calculateWeignt,setup, teardown)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
