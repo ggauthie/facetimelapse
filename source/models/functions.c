@@ -11,7 +11,6 @@ Image * createImage(int width, int height){
     return new_image;
 }
 
-}
 Pixel* modifyPixel_to_WB(Pixel* pixel){
 	int GRIS;
 	GRIS = (unsigned char)floor(0.2125*(pixel->red)+0.7154*(pixel->green)+0.0721*(pixel->blue));
