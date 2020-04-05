@@ -63,7 +63,14 @@ static void test_imageInter(void **state){
 /*test colortoWB */
 
 static void test_colortoWB(void **state){
-    
+    //si test set pixel correct
+	Pixel* pixel_1 ={255,0,0};
+	int i,k;
+    for(i=0; i<(image_1->width);i++){
+		for(k=0; k<(image_1->height);k++){
+			setPixel(image_1,i, k, pixel_1);}}
+			
+	assert_ptr_equal(color_to_WB(image2),image1);
 }
 
 static void test_modifyPixel_to_WB(void **state){
