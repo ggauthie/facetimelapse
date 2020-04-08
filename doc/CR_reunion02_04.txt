@@ -1,0 +1,21 @@
+
+-faire une 10x10 la moitié d'image en haut en rouge et l'autre en bleu les 5 premieres lignes en rouge et l'autre en bleu -> pour vérifier la fonction write bmpfile
+
+-pour test color to WB avec dimension petite (4*4) pour éviter de faire ça sur une grande image..
+
+-get pixel à ajouter
+
+-image inter test -> prendre 2 images de référence 1 et 2.  1 image en blanc et l'autre en noir et 2 images inter -> vérifier la valeur des images inter 
+(chacun des pixels vaut bien ça.) 
+
+-assert_memory_equal on passe l'adresse des 2 caractères et la taille d'un unsigned char (1 octet)
+
+-fonction de communication -> images intermédiaire structure de donnée des images inter et de ref -> à transmettre de SDL à model
+
+-pour la SDL, affichage d'une succession d'image en fonction d'une temporisation (à définir/tester) qui peut dépendre du nombre d'image intermédiaire ou tableau d'image
+
+-pour model -> regarder si le résultat de nos fonctions marche dans le main avec des write_bmp et nouvelle strucutre qui gerent les tableaux d'images intermédiaire
+
+-makefile du model qui marche avec main et test unitaires
+
+-Prochaine réunion -> mercredi 08 Avril 14 h 
