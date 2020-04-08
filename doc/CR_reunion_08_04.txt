@@ -1,11 +1,10 @@
-
 -assert_null, freeimage ne renvoit pas nul, dans freeimage on peut rajouter une fonction pour désalloué, apres avoir appeller les free, on peut pas vérifier la fonction freeimage!
 -caster les 2 entiers en float avec des parentheses en plus
 -astuce pour comparer des floats multiplier clacultate par 1000 et comparer avec 89 et 91 avec in_range.
 -setup à mettre à la place de void (state) pour chaque fonction. pour 2 images faire structure pour 2 images avec premiere fonction (Cf voir cours)
 -tester "create image" sans setup en vérifiant width et height
 -teardown faire autant de désallocation faire free structure ( qui contient les 2 images ).
--dimension image inter
+-dimension image fixe
 -faire menu avec affichage face time lapse et calcul image inter en bouton 
 -faire fondu avec une image blanc/ gris foncé/ gris/ au noir 
 
