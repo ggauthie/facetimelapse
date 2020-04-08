@@ -136,8 +136,8 @@ static void test_freeImage(void **state){
 	assert_null(image_1); //vérifie si le pointeur image est NULL
 }
 
- j'arrive pas à récupérer assert_float_equal
-/*static void test_calculateWeight(void **state){
+ /*j'arrive pas à récupérer assert_float_equal
+static void test_calculateWeight(void **state){
 	assert_float_equal(calculateWeight (10, 1),0.09, 0.001);
 
 }*/
