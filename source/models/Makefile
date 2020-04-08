@@ -17,7 +17,7 @@ endif
 main: main.o functions.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-main.o: main.c functions.h structures.h test.h
+main.o: main.c functions.h structures.h
 	$(CC) -o $@ -c $< $(CFLAGS)
     
 functions.o: functions.c functions.h structures.h
