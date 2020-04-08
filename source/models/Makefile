@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -pedantic-errors -MMD
-LDFLAGS=
+LDFLAGS= -lm -lcmocka
 
 DEBUG=no
 ifeq ($(DEBUG),yes)
@@ -10,7 +10,7 @@ endif
 all: main test
 
 MYTEST=no
-ifeq($(MYTEST),yes)
+ifeq ($(MYTEST),yes)
 all: UTest_functions run_test
 endif
 
