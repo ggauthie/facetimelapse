@@ -14,7 +14,7 @@ void freeImage(Image * image);
 
 /*conversion image couleur vers noir et blanc avec un pointeur vers une image donnée en paramètre*/
 /*return: pointeur vers une nouvelle image*/
-Image * color_to_WB(Image * image);
+void color_to_WB(Image * image);
 
 /*recupération d'un pixel noir et blanc avec ses coordonnées (x,y)*/
 /*return: la valeur du pixel*/
