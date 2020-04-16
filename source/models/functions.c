@@ -39,20 +39,17 @@ void color_to_WB(Image * image){
 	}
 }
 
-
-void  freeImage(Image * image)
-{
-    free(image->ptrPixel);
-    free(image);
-}
-
-
 Image* imagesInter(Image * image1, Image * image2, int nombre_image){
 
 	float a,b,c,d,e,f;
-        unsigned char red, blue, green;
-
+    unsigned char red, blue, green;
+    
+    if(((image1->width)!=(image2->width))&&((image1->height)!=(image2->height))){
+        printf("Error : taille images");
+        return NULL;
+    }
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
+    Image* image = createImage(image1->width, image1->height);
     for(int i=1;i<=nombre_image;i++){
         for(int j=0; j<image1->width; j++){
         for(int k=0; k<image1->height;k++){
@@ -60,18 +57,27 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
        		    a=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].blue;
 		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].green;
 		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].red;
-		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].blue;
-		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].green;
-		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].red;
-		    blue=(unsigned char)floor((a+d)/2);
-		    green=(unsigned char)floor((b+e)/2);
-		    red=(unsigned char)floor((c+f)/2);
+		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].blue;
+		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
+		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
+		    blue=(unsigned char)floor(a+d);
+		    green=(unsigned char)floor(b+e);
+		    red=(unsigned char)floor(c+f);
+		    
 		    Pixel pixel = {red, blue, green};
-		    setPixel(tab_images[i], j, k, pixel);
+		    setPixel(image, j, k, pixel);
     }
 }
+tab_images[i-1]=(*image);
 }
 	return tab_images;
+}
+
+
+void  freeImage(Image * image)
+{
+    free(image->ptrPixel);
+    free(image);
 }
 
 
