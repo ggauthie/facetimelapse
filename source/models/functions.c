@@ -46,29 +46,32 @@ void  freeImage(Image * image)
     free(image);
 }
 
+
 Image* imagesInter(Image * image1, Image * image2, int nombre_image){
 
 	float a,b,c,d,e,f;
+        unsigned char red, blue, green;
 
     Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
-    for(int i=0;i<=nombre_image;i++){
+    for(int i=1;i<=nombre_image;i++){
         for(int j=0; j<image1->width; j++){
         for(int k=0; k<image1->height;k++){
 
-            Pixel* pixel =(Pixel*)malloc(sizeof(Pixel));
-
-        a=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k].blue;
-		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k].green;
-		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[j*(image1->width)+k].red;
-		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].blue;
-		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].green;
-		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[j*(image1->width)+k].red;
-		    pixel->blue=(unsigned char)floor((a+d)/2);
-		    pixel->green=(unsigned char)floor((b+e)/2);
-		    pixel->red=(unsigned char)floor((c+f)/2);
-		    setPixel(tab_images, j, k, *pixel);
-		    tab_images++;
+       		    a=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].blue;
+		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].green;
+		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].red;
+		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].blue;
+		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].green;
+		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image1->width)+j].red;
+		    blue=(unsigned char)floor((a+d)/2);
+		    green=(unsigned char)floor((b+e)/2);
+		    red=(unsigned char)floor((c+f)/2);
+		    Pixel pixel = {red, blue, green};
+		    setPixel(tab_images[i], j, k, pixel);
     }
+}
+}
+	return tab_images;
 }
 }
 	return tab_images;
