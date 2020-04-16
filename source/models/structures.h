@@ -9,9 +9,9 @@
 #define structures_h
 
 typedef struct {
-    unsigned char blue;
-    unsigned char green;
     unsigned char red;
+    unsigned char green;
+    unsigned char blue;
 } Pixel;             /* Pixel in Red Green Blue */
                         /* Could be modified to another type of color space */
 
