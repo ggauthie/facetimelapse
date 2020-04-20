@@ -14,12 +14,18 @@ ifeq ($(MYTEST),yes)
 all: UTest_functions run_test
 endif
 
-main: main.o functions.o
+main: main.o functions.o BMPFile.o fichier.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-main.o: main.c functions.h structures.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-    
+main.o: main.c BMPFile.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+BMPFile.o: BMPFile.c BMPFile.h fichier.h functions.h structures.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+fichier.o: fichier.c fichier.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 functions.o: functions.c functions.h structures.h
 	$(CC) -o $@ -c $< $(CFLAGS)
 
