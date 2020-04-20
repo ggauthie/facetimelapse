@@ -1,8 +1,8 @@
-#include "structures.h"
+
 #include "functions.h"
 #include <math.h>
 #include <stdio.h>
-
+#include "BMPFile.h"
 Image * createImage(int width, int height){
     Image *new_image = (Image*) malloc(sizeof(Image));
     new_image->width = width;
@@ -16,15 +16,12 @@ Pixel* getPixel(Image * image, int width, int height){
 }
 
 void setPixel(Image* image, int x, int y, Pixel pixel){
-    if((x>=image->width) || (y>=image->height) || (image == NULL)){
-        printf("Error : en dehors de l'image ou image null");
-      //  return -1; pas logique si c'est un void
-    }else{
+
 	image->ptrPixel[y*image->width +x].blue=pixel.blue;
 	image->ptrPixel[y*image->width +x].red=pixel.red;
 	image->ptrPixel[y*image->width +x].green=pixel.green;
 }
-}
+
 
 void color_to_WB(Image * image){
 	int i;
@@ -39,40 +36,6 @@ void color_to_WB(Image * image){
 	}
 }
 
-Image* imagesInter(Image * image1, Image * image2, int nombre_image){
-
-	float a,b,c,d,e,f;
-    unsigned char red, blue, green;
-    
-    if(((image1->width)!=(image2->width))&&((image1->height)!=(image2->height))){
-        printf("Error : taille images");
-        return NULL;
-    }
-    Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
-    Image* image = createImage(image1->width, image1->height);
-    for(int i=1;i<=nombre_image;i++){
-        for(int j=0; j<image1->width; j++){
-        for(int k=0; k<image1->height;k++){
-
-       		    a=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].blue;
-		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].green;
-		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].red;
-		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].blue;
-		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
-		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
-		    blue=(unsigned char)floor(a+d);
-		    green=(unsigned char)floor(b+e);
-		    red=(unsigned char)floor(c+f);
-		    
-		    Pixel pixel = {red, blue, green};
-		    setPixel(image, j, k, pixel);
-    }
-}
-tab_images[i-1]=(*image);
-}
-	return tab_images;
-}
-
 
 void  freeImage(Image * image)
 {
@@ -80,6 +43,48 @@ void  freeImage(Image * image)
     free(image);
 }
 
+Image* imagesInter(Image * image1, Image * image2, int nombre_image){
+
+	float a,b,c,d,e,f;
+
+    Image** tab_images = (Image**) malloc(nombre_image*sizeof(Image));
+
+    //Image *tab_images[nombre_image];
+
+
+    for(int l=0;l<=nombre_image+1;l++){
+
+    tab_images[l]=createImage(image1->width,image1->height);
+    }
+
+
+    for(int i=1;i<=nombre_image;i++){// il faut que le numéro d image commence à 1
+        for(int j=0; j<image1->width; j++){
+        for(int k=0; k<image1->height;k++){
+
+
+        a=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].blue;
+		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].green;
+		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].red;
+		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].blue;
+		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
+		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
+
+        Pixel pixel={0,0,0};
+
+		    pixel.blue=(unsigned char)floor(a+d);
+		    pixel.green=(unsigned char)floor(b+e);
+		    pixel.red=(unsigned char)floor(c+f);
+
+		    setPixel(tab_images[i-1], j, k, pixel);
+
+
+
+    }
+}
+}
+return (tab_images[0]);
+}
 
 /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/
 float calculateWeight (int nbImage, int numeroImage){
