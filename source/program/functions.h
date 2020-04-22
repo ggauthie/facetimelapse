@@ -4,7 +4,7 @@
 #include "structures.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+
 /*création d'image noir et blanc avec une largeur et une hauteur*/
 /*return: pointeur sur l'image créee*/
 Image * createImage(int width, int height);
@@ -14,11 +14,11 @@ void freeImage(Image * image);
 
 /*conversion image couleur vers noir et blanc avec un pointeur vers une image donnée en paramètre*/
 /*return: pointeur vers une nouvelle image*/
-Image * color_to_WB(Image * image);
+void color_to_WB(Image * image);
 
 /*recupération d'un pixel noir et blanc avec ses coordonnées (x,y)*/
 /*return: la valeur du pixel*/
-Pixel  getPixel(Image * image, int width, int height);
+Pixel * getPixel(Image * image, int width, int height);
 
 /*remplace le pixel aux coordonnées (x,y) de l'image par une valeur de pixel donnée en paramètre*/
 void setPixel(Image* image, int x, int y, Pixel pixel);
