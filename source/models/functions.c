@@ -2,6 +2,10 @@
 #include <math.h>
 #include <stdio.h>
 #include "BMPFile.h"
+#define IMAGE_WIDTH  3
+#define IMAGE_HEIGHT  3
+
+
 Image * createImage(int width, int height){
     Image *new_image = (Image*) malloc(sizeof(Image));
     new_image->width = width;
