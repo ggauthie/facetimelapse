@@ -2,8 +2,8 @@
 
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 300;
+const int SCREEN_HEIGHT = 240;
 
 bool FTL_init(SDL_Window** gWindow, SDL_Surface** gScreenSurface)
 {
@@ -163,3 +163,4 @@ Image * FTL_conversion_SDL_to_image(SDL_Surface** gXOut){
 	return Surf;
 
 	}
+
