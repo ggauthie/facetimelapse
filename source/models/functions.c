@@ -66,7 +66,8 @@ Image** imagesInter(Image * image1, Image * image2, int nombre_image){
         for(int j=0; j<image1->width; j++){
         for(int k=0; k<image1->height;k++){
 
-
+            Pixel *pixel =(Pixel*)malloc(sizeof(Pixel));
+            
             a=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].blue;
 		    b=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].green;
 		    c=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].red;
