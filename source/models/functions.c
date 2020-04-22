@@ -46,7 +46,7 @@ void  freeImage(Image * image)
     free(image);
 }
 
-Image** imagesInter(Image * image1, Image * image2, int nombre_image){
+Image* imagesInter(Image * image1, Image * image2, int nombre_image){
 
 	float a,b,c,d,e,f;
     int nbimages=0;
