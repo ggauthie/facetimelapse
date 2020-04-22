@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "BMPFile.h"
+#include <string.h>
 
 #define SDL_FONCTION_H
-
 
 //Starts up SDL and creates window
 bool FTL_init(SDL_Window** gWindow, SDL_Surface** gScreenSurface);
