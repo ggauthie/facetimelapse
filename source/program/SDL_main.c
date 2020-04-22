@@ -1,6 +1,10 @@
 
 #include "SDL_fonction.h"
 #include "BMPFile.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+//#include <SDL2/SDL_ttf.h>
 
 #define MASQUE_ROUGE 0x000000ff
 #define MASQUE_VERT  0x0000ff00
@@ -17,28 +21,36 @@ SDL_Surface* gScreenSurface = NULL;
 //The image we will load and show on the screen
 SDL_Surface* gXOut = NULL;
 
+void delays(int number_of_seconds)
+{
+// Converting time into milli_seconds
+int milli_seconds = 1000 * number_of_seconds;
+// Storing start time
+clock_t start_time = clock();
+// looping till required time is not achieved
+while (clock() < start_time + milli_seconds) ;
+}
 
 int main( int argc, char* args[] )
 {
-	//Création des images
-	SDL_Surface* tableau[2];
-	Image* im1 = readBMPFile("hello_world.bmp",1);
-	Image* im2 = createImage(640,480);
 
-				Pixel pixel1 = {255,0,255};
-				Pixel pixel2 = {0,255,0};
-				for(int x=0;x<im2->width;x++){
-					for(int y=0;y<im2->height;y++){
-						setPixel(im2,x,y,pixel2);
-					}
-				}
-	//Conversion des images vers la structure SDL_Surface
-	SDL_Surface* Surf1 =FTL_conversion_image_to_SDL(&im1);
-	SDL_Surface* Surf2 =FTL_conversion_image_to_SDL(&im2);
+	Image * image1 = readBMPFile("tiger.bmp",1);
+	Image * image2 = readBMPFile("tiger.bmp",1);
+	color_to_WB(image2);
 
-	//Remplissage du tableau
-	tableau[0]=Surf1;
-	tableau[1]=Surf2;
+	int nombre_image=20;
+
+	Image* imageintermediaire;
+	SDL_Surface** tableau = (SDL_Surface**) malloc(nombre_image*sizeof(SDL_Surface));
+
+
+
+	for(int i=1;i<=nombre_image;i++){
+		imageintermediaire = (imagesInter(image1,image2,nombre_image))+(2*(i-1));
+		SDL_Surface* Surf =FTL_conversion_image_to_SDL(&imageintermediaire);
+		tableau[i-1]=Surf;
+
+	}
 
 	//Start up SDL and create window
 	if( !FTL_init(&gWindow,&gScreenSurface))
@@ -80,21 +92,19 @@ int main( int argc, char* args[] )
 					}
 				}
 				//Initialisaton du temps
-				int tempsActuel = SDL_GetTicks ();
-				int temps_affichage= tempsActuel%5000;
+				//int tempsActuel = SDL_GetTicks ();
+				//int temps_affichage= tempsActuel%5000;
 
 				//Apply the image
-				if(temps_affichage==1){
-				SDL_BlitSurface( tableau[1], NULL, gScreenSurface, NULL );
+
+					for(int j=0;j<nombre_image;j++){
+
+				SDL_BlitSurface( tableau[j], NULL, gScreenSurface, NULL );
 
 				//Update the surface
-				SDL_UpdateWindowSurface( gWindow );}
-
-				if(temps_affichage==2500){
-				SDL_BlitSurface( tableau[0], NULL, gScreenSurface, NULL );
-
-				//Update the surface
-				SDL_UpdateWindowSurface( gWindow );}
+				SDL_UpdateWindowSurface( gWindow );
+				delays(100);
+				}
 
 			}
 		}
