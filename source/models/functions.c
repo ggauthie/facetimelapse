@@ -43,7 +43,7 @@ void  freeImage(Image * image)
     free(image);
 }
 
-Image* imagesInter(Image * image1, Image * image2, int nombre_image){
+Image** imagesInter(Image * image1, Image * image2, int nombre_image){
 
 	float a,b,c,d,e,f;
 
@@ -63,12 +63,12 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
         for(int k=0; k<image1->height;k++){
 
 
-        a=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].blue;
-		    b=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].green;
-		    c=calculateWeight(nombre_image,i)*image1->ptrPixel[k*(image1->width)+j].red;
-		    d=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].blue;
-		    e=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
-		    f=(1-calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
+            a=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].blue;
+		    b=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].green;
+		    c=(1-calculateWeight(nombre_image,i))*image1->ptrPixel[k*(image1->width)+j].red;
+		    d=(calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].blue;
+		    e=(calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
+		    f=(calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
 
         Pixel pixel={0,0,0};
 
@@ -83,7 +83,7 @@ Image* imagesInter(Image * image1, Image * image2, int nombre_image){
     }
 }
 }
-return (tab_images[0]);
+return (tab_images);
 }
 
 /*Renvoi un tableau d'image intermédiaire à partir de deux images et du nombre voulu*/

@@ -29,7 +29,7 @@ Pixel* modifyPixel_to_WB(Pixel pixel);
 
 /*Création d'images intermédiaire à partir de deux images de référence (pointeurs donnés en paramètre) et du nombre voulu d'image*/
 /*return: Renvoi un pointeur vers un tableau d'image*/
-Image* imagesInter(Image * image1, Image * image2, int nombre_image);
+Image** imagesInter(Image * image1, Image * image2, int nombre_image);
 
 
 //Fonction conversion
