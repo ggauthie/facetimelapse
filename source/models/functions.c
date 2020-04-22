@@ -1,4 +1,3 @@
-
 #include "functions.h"
 #include <math.h>
 #include <stdio.h>
@@ -46,19 +45,20 @@ void  freeImage(Image * image)
 Image** imagesInter(Image * image1, Image * image2, int nombre_image){
 
 	float a,b,c,d,e,f;
-
-    Image** tab_images = (Image**) malloc(nombre_image*sizeof(Image));
-
-    //Image *tab_images[nombre_image];
-
-
-    for(int l=0;l<=nombre_image+1;l++){
+    int nbimages=0;
+    Image* tab_images = (Image*)malloc(nombre_image*sizeof(Image));
+    for (int m=0;m<nombre_image;m++){
+        tab_images[m].width = IMAGE_WIDTH;
+        tab_images[m].height = IMAGE_HEIGHT;
+        tab_images[m].ptrPixel= (Pixel*)malloc(IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(Pixel));
+    }
+    /*for(int l=0;l<=nombre_image+1;l++){
 
     tab_images[l]=createImage(image1->width,image1->height);
-    }
+    }*/
 
 
-    for(int i=1;i<=nombre_image;i++){// il faut que le numéro d image commence à 1
+    for(int i=1;i<nombre_image;i++){// il faut que le numéro d image commence à 1
         for(int j=0; j<image1->width; j++){
         for(int k=0; k<image1->height;k++){
 
@@ -70,13 +70,10 @@ Image** imagesInter(Image * image1, Image * image2, int nombre_image){
 		    e=(calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].green;
 		    f=(calculateWeight(nombre_image,i))*image2->ptrPixel[k*(image2->width)+j].red;
 
-        Pixel pixel={0,0,0};
-
-		    pixel.blue=(unsigned char)floor(a+d);
-		    pixel.green=(unsigned char)floor(b+e);
-		    pixel.red=(unsigned char)floor(c+f);
-
-		    setPixel(tab_images[i-1], j, k, pixel);
+		    pixel->blue=(unsigned char)floor((a+d)/2);
+		    pixel->green=(unsigned char)floor((b+e)/2);
+		    pixel->red=(unsigned char)floor((c+f)/2);
+		    setPixel(&tab_images[i], j, k, *(pixel));
 
 
 
