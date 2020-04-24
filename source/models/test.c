@@ -20,8 +20,8 @@ static int setup(void **state){
     *state = image_1;
     return 0;
 }
-/*
-static int setup_1(void **state){
+
+/*static int setup_1(void **state){
     
     Image *image_2 = createImage(3,3);
     Image *image_3 = createImage(3,3);
@@ -33,13 +33,14 @@ static int setup_1(void **state){
 
     for(i=0; i< 3; i++){
 	     for(j=0; j< 3; j++){
-		setPixel(image_1,i,j,pixel_1);
-		setPixel(image_2,i,j,pixel_2);
+		setPixel(image_2,i,j,pixel_1);
+		setPixel(image_3,i,j,pixel_2);
 	      }
 }
 Image *tab[]={image_2,image_3};
 *state =tab;
 return 0;
+
 }*/
 
 static int teardown(void **state){
@@ -81,8 +82,7 @@ static void test_imageInter(void **state){
         setPixel(image_2,i,j,pixel_1);
         setPixel(image_3,i,j,pixel_2);
           }
-    }
-
+      }
     Image** tab_images = imagesInter(image_2, image_3, 3);
 
     for(i=0; i<(image_2->width)*(image_2->height);i++){
@@ -155,14 +155,28 @@ static void test_calculateWeight(void **state){
 
 }
 
+static void test_freeImage(void **state){
+    Image* image_1 =(Image*)(*state);
+
+    freeImage(image_1);
+
+    assert_int_equal(image_1->width, 0);
+    assert_int_equal(image_1->height, 0);
+    assert_ptr_equal(image_1->ptrPixel,NULL);
+
+}
+
+
+
 int main(void) {
     const struct CMUnitTest tests[] = {
-      cmocka_unit_test(test_imageInter),
       cmocka_unit_test(test_createImage),
       cmocka_unit_test_setup_teardown(test_setPixel,setup, teardown),
       cmocka_unit_test_setup_teardown(test_getPixel,setup, teardown),
       cmocka_unit_test_setup_teardown(test_colortoWB,setup, teardown),
-      cmocka_unit_test_setup_teardown(test_calculateWeight,setup, teardown)
+      cmocka_unit_test_setup_teardown(test_calculateWeight,setup, teardown),
+      cmocka_unit_test(test_imageInter),
+      cmocka_unit_test_setup_teardown(test_freeImage, setup, teardown)
   };
   return cmocka_run_group_tests(tests, NULL, NULL);
 }
