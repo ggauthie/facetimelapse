@@ -35,16 +35,19 @@ test: test.o functions.o
 test.o : test.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-UTest_functions: LDFLAGS+= -Wl, --wrap=rand -lcmocka -coverage
+UTest_functions: LDFLAGS+= -Wl,--wrap=rand -lcmocka -coverage
 UTest_functions: CFLAGS+= -coverage
 UTest_functions: UTest_functions.o functions_gcov.o
 	$(CC) $^ $(LDFLAGS) -o $@
 
 run_test: main UTest_functions
-	./UTest_functions; \
-	lcov -- capture --directory . --output-file coverage.info ; \
-	genhtml coverage.info -output-directory out ; \
+	./UTest_functions ; \
+	lcov --capture --directory . --output-file coverage.info ; \
+	genhtml coverage.info --output-directory out ; \
 	valgrind ./$<
+
+UTest_functions.o: test.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 functions_gcov.o: functions.c
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -53,8 +56,8 @@ functions_gcov.o: functions.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-clean:
-	rm -f *.o *~ main UTest_functions *.d *.gcno *gcda *.gcov \
+clean: 
+	rm *.o *~ main UTest_functions *.d *.gcno *gcda *.gcov \
 	*.info *.log -r out -f
 
 #handle header dependencies with -MMD option
