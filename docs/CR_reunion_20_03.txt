@@ -1,0 +1,11 @@
+
+-faire programme main avec programme test fonction pour les fonctions modele
+-faire un makefile modele et un SDL
+-la fonction de conversion ira dans les 2 sens SDL_surface vers structure image models
+-possibilité de plusieurs SDL_surface car plusieurs affichages d'images en meme temps
+-doxygen devant le prototype de chaque fonction dans le fichier fonction.h
+-réfléchir au fonction de communication cb d'image intermédiaire entre chaque image de référence 
+-au niveau du modèle gérer des tableau d'image de ref et d'intermérdaire
+
+
+-Prochaine réunion ->  le Jeudi 26 Mars à 13h30 

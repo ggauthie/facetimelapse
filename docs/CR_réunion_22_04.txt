@@ -1,0 +1,22 @@
+-libraire ou chemin relatif pour aller chercher fichier dans dossier source/model
+ remettre les répertoire pour avoir une seule version de function.c ...
+
+-mode verbose à 0 pour éviter les écriture des détials des fichiers
+
+-make run tests génère fichier html index.html ->bilan (répertoire out) 
+-faire make run test 
+
+-tester avec deux visages recadrés et alignés pour voir 
+
+-un makefile qui marche avec couverture de code max presque100% quand on lance valgrind pas de fuite mémoire
+et doxygen faites partout 
+
+-faire menu pour ouvrir des images et séléctionner des images clefs et nbre d'image intermédiaire (peut-etre au clic à incrémenter)
+
+-temps d'attente à vérifier pour fermeture SDL -> regarder avec des timers pour voir ce qu'il prend du temps et vérifier les fuites mémoire + faire des free
+
+-valgrind est lancé sur le makefile du main du models ! 
+
+-réfléchir et choisir quelle fonctionnalité à faire
+
+date prochaine réunion -> 16h Jeudi 30 Avril 
