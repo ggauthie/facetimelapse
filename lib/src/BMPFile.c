@@ -165,7 +165,10 @@ Image* readBMPFile(char* filename, int verbose)
 		displayDIBHeader(&dibh);
 	Image* im = readRawImage(f,	fh.raster_address, dibh.image_height, dibh.image_width);
 
-	fclose(f);
+	printf("Close file %s", filename);
+    fclose(f);
+    printf("Success Close file %s", filename);
+	
 	return im;
 }
 
