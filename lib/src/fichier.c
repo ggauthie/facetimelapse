@@ -1,4 +1,5 @@
 #include "fichier.h"
+#include <stdlib.h>
 
 
 FILE* ouvrirFichier(char* nom, char* mode, TypeRetour t)

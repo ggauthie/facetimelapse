@@ -1,8 +1,7 @@
 #include "functions.h"
-#include "BMPFile.h"
 
 #include <math.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 #define IMAGE_WIDTH  3
 #define IMAGE_HEIGHT  3

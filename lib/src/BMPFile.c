@@ -5,7 +5,6 @@
  * \date ...
  */
 
-
 #include "BMPFile.h"
 
 /*!
