@@ -1,9 +1,7 @@
 #ifndef FUNCTIONS_H
-#define  FUNCTIONS_H
+#define FUNCTIONS_H
 
 #include "structures.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /*création d'image noir et blanc avec une largeur et une hauteur*/
 /*return: pointeur sur l'image créee*/

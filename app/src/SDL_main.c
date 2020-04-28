@@ -40,14 +40,14 @@ int main( int argc, char* args[] )
 
 	int nombre_image=20;
 
-	Image* imageintermediaire;
+	Image** imageintermediaire;
 	SDL_Surface** tableau = (SDL_Surface**) malloc(nombre_image*sizeof(SDL_Surface));
 
 
 
 	for(int i=1;i<=nombre_image;i++){
 		imageintermediaire = (imagesInter(image1,image2,nombre_image))+(2*(i-1));
-		SDL_Surface* Surf =FTL_conversion_image_to_SDL(&imageintermediaire);
+		SDL_Surface* Surf =FTL_conversion_image_to_SDL(imageintermediaire);
 		tableau[i-1]=Surf;
 
 	}

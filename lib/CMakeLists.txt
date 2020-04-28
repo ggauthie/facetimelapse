@@ -10,6 +10,7 @@ add_library(FaceTimelAppUtils STATIC
 
 target_compile_features(FaceTimelAppUtils PRIVATE c_std_99)
 target_include_directories(FaceTimelAppUtils PUBLIC include)
+target_compile_definitions(FaceTimelAppUtils PUBLIC -D_CRT_SECURE_NO_WARNINGS)
 
 message(STATUS "Add Tests FaceTimelAppTests")
 add_executable(FaceTimelAppTests tests/tests.c)

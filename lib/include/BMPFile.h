@@ -4,13 +4,12 @@
  * \date ...
  */
 
-#ifndef FICHIER_H
-#define FICHIER_H
+#ifndef BMPFICHIER_H
+#define BMPFICHIER_H
+
+#include "functions.h"
 
 #include <stdint.h>
-#include <math.h>
-#include "functions.h"
-#include "fichier.h"
 #include <stdio.h>
 
 /**

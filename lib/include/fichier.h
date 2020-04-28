@@ -2,12 +2,9 @@
 #define FICHIER_H
 
 #include <stdio.h>
-#include <stdlib.h>
-
 
 #define MAX_NOM 255
 #define NBIDMAX 2048
-
 
 typedef enum {ARRET, RETOUR} TypeRetour;
 
